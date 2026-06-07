@@ -251,3 +251,71 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
   });
 }
+
+/* ----------------- Hero video carousel -----------------
+   Add or remove files from the `videos` array. Files live in
+   assets/videos/ — keep them ~5-10 MB max each for performance.
+   The carousel cross-fades between layers and pauses on mobile
+   data-saver / reduced-motion preferences.
+-------------------------------------------------------- */
+const videos = [
+  'assets/videos/video-01.mp4',
+  'assets/videos/video-02.mp4',
+  'assets/videos/video-03.mp4',
+  'assets/videos/video-04.mp4'
+];
+
+const SLIDE_MS = 7000; // time each video stays visible
+
+(function initHeroCarousel () {
+  const wrap = document.getElementById('heroVideo');
+  if (!wrap || !videos.length) return;
+
+  // Bail out gracefully if data-saver is on or user prefers reduced motion
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData     = navigator.connection && navigator.connection.saveData;
+  if (reduceMotion || saveData) {
+    wrap.style.display = 'none';
+    return;
+  }
+
+  const layers = wrap.querySelectorAll('.hero__video-layer');
+  let active = 0;
+  let idx = 0;
+
+  // Load first two videos
+  layers[0].src = videos[0];
+  if (videos.length > 1) layers[1].src = videos[1 % videos.length];
+
+  // Attempt autoplay; if blocked, hide the carousel and let the gradient show
+  layers[0].play().catch(() => {
+    wrap.style.display = 'none';
+  });
+  layers[1].play().catch(() => {});
+
+  // If a video fails to load, skip it
+  layers.forEach(v => v.addEventListener('error', () => {
+    v.style.display = 'none';
+  }));
+
+  // Crossfade loop
+  setInterval(() => {
+    const next = (active + 1) % 2;
+    idx = (idx + 1) % videos.length;
+
+    // Pre-load next clip into the inactive layer
+    const nextSrc = videos[(idx + 1) % videos.length];
+    layers[next].src = nextSrc;
+    layers[next].play().catch(() => {});
+
+    // Swap active class
+    layers[active].classList.remove('is-active');
+    layers[next].classList.add('is-active');
+    active = next;
+  }, SLIDE_MS);
+
+  // Pause when tab hidden to save resources
+  document.addEventListener('visibilitychange', () => {
+    layers.forEach(v => document.hidden ? v.pause() : v.play().catch(()=>{}));
+  });
+})();

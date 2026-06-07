@@ -20,6 +20,12 @@ Sitio web del catálogo de cafés de especialidad 2026 de **Club del Café**. Pr
     │   └── logo.jpg          # Logo Club del Café
     ├── pdf/
     │   └── catalogo-cafes-especialidad-2026.pdf
+    ├── videos/               # Videos del hero (fondo de página)
+    │   ├── README.md         # Instrucciones para subir los videos
+    │   ├── video-01.mp4      # ← tú los añades
+    │   ├── video-02.mp4
+    │   ├── video-03.mp4
+    │   └── video-04.mp4
     └── variedades/           # Imágenes de las 14 etiquetas
         ├── blend-castillo.jpg
         ├── papayo.jpg
@@ -40,6 +46,7 @@ Sitio web del catálogo de cafés de especialidad 2026 de **Club del Café**. Pr
 ## Características
 
 - **Diseño editorial premium** — Tipografía serif (Cormorant Garamond) + sans-serif (Manrope), paleta navy + dorado del logo, fondo cremoso para el catálogo.
+- **Carrusel de videos en el hero** — Reproduce en bucle videos de @clubcafecol con cross-fade automático. Pausa en `prefers-reduced-motion` y modo ahorro de datos. Ver `assets/videos/README.md` para añadirlos.
 - **Hero animado** — Animaciones de entrada escalonadas (CSS), grano de película, gradientes radiales.
 - **Catálogo en grid responsivo** — Scroll-reveal con `IntersectionObserver`, hover-overlay con perfil sensorial.
 - **Modal de detalle** — Vista expandida de cada variedad con ficha completa.
