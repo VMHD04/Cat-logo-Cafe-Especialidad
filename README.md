@@ -127,7 +127,7 @@ HTML5 + CSS3 + JavaScript vanilla. Sin dependencias, sin frameworks. Hosting est
 ## Contacto
 
 - Instagram · [@clubcafecol](https://instagram.com/clubcafecol)
-- Tel · +57 320 9016680
+- Tel · +57 315 4510390
 - Ubicación · Teusaquillo, Bogotá
 
 ---
