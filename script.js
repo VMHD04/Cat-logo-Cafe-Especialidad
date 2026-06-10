@@ -319,3 +319,75 @@ const SLIDE_MS = 7000; // time each video stays visible
     layers.forEach(v => document.hidden ? v.pause() : v.play().catch(()=>{}));
   });
 })();
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   ============================================================ */
+
+const WA_NUMBER = '573154510390'; // +57 315 451 0390  (sin + ni espacios)
+
+const WA_MESSAGES = [
+  {
+    icon: '☕',
+    label: 'Quiero conocer el catálogo 2026',
+    text: '¡Hola Club del Café! Acabo de explorar su catálogo 2026 y me encantaría conocer cuáles de las 14 variedades tienen disponibles ahora mismo. ¿Me pueden orientar?'
+  },
+  {
+    icon: '🛒',
+    label: 'Quiero hacer un pedido',
+    text: '¡Hola! Estoy listo para hacer un pedido de café de especialidad. ¿Me cuentan cómo es el proceso, formas de pago y tiempos de entrega?'
+  },
+  {
+    icon: '🎁',
+    label: 'Busco un regalo de café especial',
+    text: '¡Hola! Estoy buscando regalar café de especialidad y quiero algo memorable. ¿Me ayudan a elegir la variedad ideal según el perfil del que lo recibirá?'
+  },
+  {
+    icon: '🏬',
+    label: 'Tengo una cafetería / negocio',
+    text: '¡Hola! Represento una cafetería/negocio y me interesa conocer sus opciones para venta al por mayor de café de especialidad. ¿Podemos conversar?'
+  },
+  {
+    icon: '💬',
+    label: 'Soy nuevo, asesórenme',
+    text: '¡Hola! Estoy iniciando en el mundo del café de especialidad y me gustaría que me asesoraran sobre por dónde empezar y qué variedad recomiendan probar primero.'
+  }
+];
+
+(function initWhatsApp () {
+  const launcher = document.getElementById('waLauncher');
+  const panel    = document.getElementById('waPanel');
+  const closeBtn = document.getElementById('waClose');
+  const quickEl  = document.getElementById('waQuick');
+  const wrap     = document.getElementById('wa');
+  if (!launcher || !panel || !quickEl) return;
+
+  WA_MESSAGES.forEach(m => {
+    const a = document.createElement('a');
+    a.className = 'wa__quick-btn';
+    a.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m.text)}`;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = `
+      <span class="wa__quick-btn-icon">${m.icon}</span>
+      <span class="wa__quick-btn-text">${m.label}</span>
+      <span class="wa__quick-btn-arrow" aria-hidden="true">›</span>
+    `;
+    quickEl.appendChild(a);
+  });
+
+  const open  = () => { panel.setAttribute('aria-hidden', 'false'); launcher.setAttribute('aria-expanded', 'true');  wrap.classList.add('is-open'); };
+  const close = () => { panel.setAttribute('aria-hidden', 'true');  launcher.setAttribute('aria-expanded', 'false'); wrap.classList.remove('is-open'); };
+  const toggle = () => panel.getAttribute('aria-hidden') === 'false' ? close() : open();
+
+  launcher.addEventListener('click', toggle);
+  closeBtn.addEventListener('click', close);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && panel.getAttribute('aria-hidden') === 'false') close();
+  });
+
+  document.addEventListener('click', e => {
+    if (panel.getAttribute('aria-hidden') === 'true') return;
+    if (!wrap.contains(e.target)) close();
+  });
+})();
