@@ -1138,3 +1138,120 @@ button { font: inherit; cursor: pointer; }
   text-transform: uppercase;
   color: rgba(11,26,51,0.4);
 }
+/* ============================================================
+   INSTAGRAM STICKER (CTA flotante en el panel del hero)
+   ============================================================ */
+.ig-sticker {
+  position: absolute;
+  top: -32px;
+  right: -32px;
+  z-index: 5;
+  width: 128px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--navy-900, #07101F);
+  background: radial-gradient(circle at 30% 30%, #ECDDB0 0%, #D4B863 55%, #B8975A 100%);
+  border-radius: 50%;
+  box-shadow:
+    0 18px 40px -10px rgba(201,169,97,0.55),
+    0 6px 16px rgba(0,0,0,0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.25),
+    inset 0 -8px 20px rgba(0,0,0,0.15);
+  animation:
+    ig-bounce-in 1s cubic-bezier(.34,1.56,.64,1) 1.2s both,
+    ig-bobble 3.6s ease-in-out 2.4s infinite;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  cursor: pointer;
+  will-change: transform;
+}
+.ig-sticker:hover {
+  animation: ig-bounce-pop .6s cubic-bezier(.34,1.56,.64,1);
+  transform: scale(1.12);
+}
+.ig-sticker:active {
+  transform: scale(1.04);
+}
+
+.ig-sticker__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: ig-spin 16s linear infinite;
+}
+.ig-sticker:hover .ig-sticker__svg {
+  animation-duration: 6s;
+}
+
+.ig-sticker__text {
+  font-family: var(--sans, sans-serif);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  fill: var(--navy-900, #07101F);
+  text-transform: uppercase;
+}
+
+.ig-sticker__center {
+  position: relative;
+  z-index: 2;
+  background: var(--navy-900, #07101F);
+  color: var(--gold-soft, #D9C28A);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 0 0 1px rgba(201,169,97,0.4),
+    0 4px 10px rgba(0,0,0,0.3);
+  transition: transform .35s ease;
+}
+.ig-sticker:hover .ig-sticker__center {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+@keyframes ig-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ig-bounce-in {
+  0%   { opacity: 0; transform: scale(0)   rotate(-180deg); }
+  60%  { opacity: 1; transform: scale(1.18) rotate(10deg); }
+  80%  {            transform: scale(0.95) rotate(-4deg); }
+  100% { opacity: 1; transform: scale(1)   rotate(0); }
+}
+
+@keyframes ig-bobble {
+  0%, 100% { transform: translateY(0)   rotate(0); }
+  25%      { transform: translateY(-7px) rotate(-3deg); }
+  50%      { transform: translateY(0)   rotate(0); }
+  75%      { transform: translateY(-4px) rotate(3deg); }
+}
+
+@keyframes ig-bounce-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18) rotate(-6deg); }
+  70%  { transform: scale(1.05) rotate(3deg); }
+  100% { transform: scale(1.12); }
+}
+
+@media (max-width: 980px) {
+  .ig-sticker {
+    width: 110px;
+    height: 110px;
+    top: -20px;
+    right: -10px;
+  }
+  .ig-sticker__text { font-size: 8.5px; }
+  .ig-sticker__center { width: 40px; height: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-sticker,
+  .ig-sticker__svg { animation: none !important; }
+}
