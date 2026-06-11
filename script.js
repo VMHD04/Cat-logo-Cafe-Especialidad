@@ -389,5 +389,6 @@ const WA_MESSAGES = [
   document.addEventListener('click', e => {
     if (panel.getAttribute('aria-hidden') === 'true') return;
     if (!wrap.contains(e.target)) close();
-  });
+  });  
 })();
+
