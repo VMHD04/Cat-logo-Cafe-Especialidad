@@ -1630,3 +1630,134 @@ button { font: inherit; cursor: pointer; }
   color: rgba(240,230,210,0.6);
   margin: 0;
 }
+/* ============================================================
+   MANIFIESTO — versión DARK NAVY
+   (sobreescribe el fondo cream y estiliza las cards como image 2)
+   ============================================================ */
+.manifest {
+  background: var(--navy-900, #07101F);
+  color: var(--cream, #F0E6D2);
+  position: relative;
+  overflow: hidden;
+}
+.manifest::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,169,97,0.08), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(27,51,95,0.4), transparent 70%);
+  pointer-events: none;
+}
+.manifest::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+}
+.manifest__inner { position: relative; z-index: 1; }
+
+/* Líneas divisoras en dorado tenue */
+.manifest__rule {
+  background: rgba(201,169,97,0.18);
+}
+
+/* "01 — Por qué elegirnos" en dorado */
+.manifest__col--label .kicker {
+  color: var(--gold-soft, #D9C28A);
+}
+
+/* "Una experiencia premium..." */
+.manifest__lead {
+  color: var(--cream, #F0E6D2);
+}
+.manifest__lead::first-letter {
+  color: var(--gold, #C9A961);
+}
+.manifest__lead em {
+  color: var(--gold-soft, #D9C28A);
+}
+
+/* Texto del manifiesto */
+.manifest__text {
+  color: rgba(240,230,210,0.65);
+}
+
+/* Borde superior del grid */
+.benefits-grid {
+  border-top-color: rgba(201,169,97,0.2);
+}
+
+/* ----- CARDS estilo image 2 ----- */
+.benefit {
+  background: rgba(11,26,51,0.55);
+  border: 1px solid rgba(201,169,97,0.22);
+  border-radius: 14px;
+  padding: 32px 24px;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  transition:
+    transform 0.4s cubic-bezier(.2,.7,.2,1),
+    border-color 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+  opacity: 0;
+  animation: benefit-rise 0.7s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.benefit:nth-child(1) { animation-delay: 0.1s; }
+.benefit:nth-child(2) { animation-delay: 0.2s; }
+.benefit:nth-child(3) { animation-delay: 0.3s; }
+.benefit:nth-child(4) { animation-delay: 0.4s; }
+
+.benefit:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201,169,97,0.55);
+  background: rgba(18,36,70,0.75);
+  box-shadow: 0 22px 44px -16px rgba(0,0,0,0.55);
+}
+
+/* Icono — círculo dorado SÓLIDO con gradiente */
+.benefit__icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #D4B863 0%, #C9A961 70%, #B8975A 100%);
+  color: var(--navy-900, #07101F);
+  border: none;
+  border-radius: 50%;
+  box-shadow:
+    0 8px 20px rgba(201,169,97,0.3),
+    inset 0 0 0 1px rgba(255,255,255,0.22),
+    inset 0 -4px 10px rgba(0,0,0,0.15);
+  margin-bottom: 10px;
+  transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
+}
+.benefit:hover .benefit__icon {
+  transform: scale(1.12) rotate(-6deg);
+  box-shadow:
+    0 12px 26px rgba(201,169,97,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.22);
+}
+
+/* Textos */
+.benefit__title {
+  font-size: 19px;
+  color: var(--cream, #F0E6D2);
+  letter-spacing: -0.005em;
+}
+.benefit__text {
+  color: rgba(240,230,210,0.6);
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+@keyframes benefit-rise {
+  0%   { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefit { animation: none !important; opacity: 1; }
+}
