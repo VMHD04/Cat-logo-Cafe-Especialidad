@@ -1439,3 +1439,43 @@ button { font: inherit; cursor: pointer; }
   .ig-headline__arrow,
   .ig-headline__badge::before { animation: none !important; }
 }
+/* Benefits grid dentro del manifiesto */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.benefit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.benefit__icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--gold);
+  background: var(--paper-2);
+  margin-bottom: 4px;
+}
+.benefit__title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--navy-900);
+  letter-spacing: -0.005em;
+}
+.benefit__text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(14,20,33,0.7);
+  margin: 0;
+}
